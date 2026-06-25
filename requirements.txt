@@ -16,6 +16,7 @@ mccabe==0.7.0
 pep8-naming==0.15.1
 pillow==11.3.0
 psycopg==3.2.13
+psycopg2==2.9.12
 pycodestyle==2.14.0
 pyflakes==3.4.0
 PyJWT==2.13.0

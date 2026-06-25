@@ -92,11 +92,11 @@ WSGI_APPLICATION = "cinema_service.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("DB_NAME"),
-        "USER": os.environ.get("DB_USER"),
-        "PASSWORD": os.environ.get("DB_PASSWORD"),
-        "HOST": os.environ.get("DB_HOST").split(" "),
-        "PORT": os.environ.get("DB_PORT"),
+        "POSTGRES_NAME": os.environ.get("POSTGRES_NAME"),
+        "POSTGRES_USER": os.environ.get("POSTGRES_USER"),
+        "POSTGRES_PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "POSTGRES_HOST": os.environ.get("POSTGRES_HOST").split(" "),
+        "POSTGRES_PORT": os.environ.get("POSTGRES_PORT"),
     }
 }
 
