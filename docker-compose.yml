@@ -1,35 +1,39 @@
 services:
   cinema:
     build:
-      - context: .
+      context: .
     env_file:
-      - ./.env
+      - .env
     ports:
       - "8000:8000"
+    volumes:
+      - ./:/app
+      - my_media:$MEDIA_DATA
     command:
       sh -c "
       while ! nc -z db 5432; do
         echo 'Waiting for postgres...';
         sleep 2;
       done;
-      python manage.py migrate
+      python manage.py migrate &&
       python manage.py runserver 0.0.0.0:8000
       "
-    volumes:
-      - ./:/app
-      - my_media:${MEDIA_DATA}
     depends_on:
       - db
 
   db:
     image: postgres:17-alpine
     env_file:
-      - ./.env
+      - .env
+    environment:
+      - POSTGRES_DB=$POSTGRES_NAME
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
     ports:
       - "5432:5432"
     restart: always
     volumes:
-      - cinema_app:${PGDATA}
+      - cinema_app:/var/lib/postgresql/17/docker
 
 
 volumes:
